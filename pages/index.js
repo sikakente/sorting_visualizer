@@ -23,7 +23,8 @@ export default function Home() {
   };
 
   const handleMergeSort = () => {
-    const { sortedArray: newBars, animations } = mergeSort(bars);
+    const { animations } = mergeSort(bars);
+    // source: https://github.com/clementmihailescu/Sorting-Visualizer-Tutorial/blob/master/src/SortingVisualizer/SortingVisualizer.jsx
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
       const isColorChange = i % 3 !== 2;
@@ -45,7 +46,6 @@ export default function Home() {
         }, i * ANIMATION_SPEED_MS);
       }
     }
-    //setBars(newBars);
   };
 
   const handleQuickSort = () => {};
