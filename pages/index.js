@@ -6,13 +6,13 @@ import { generateRandomBars } from "../utils/generateRandomBars";
 import mergeSort from "../sorting_algorithms/merge-sort";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 200;
+const ANIMATION_SPEED_MS = 150;
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = "rgb(106, 90, 205)";
+const PRIMARY_COLOR = "#14213d";
 
 // This is the color of array bars that are being compared throughout the animations.
-const SECONDARY_COLOR = "rgb(238, 130, 238)";
+const SECONDARY_COLOR = "#f77f00";
 
 export default function Home() {
   const [bars, setBars] = useState(() => generateRandomBars());
@@ -26,7 +26,6 @@ export default function Home() {
     const { sortedArray: newBars, animations } = mergeSort(bars);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
-      console.log(arrayBars);
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];

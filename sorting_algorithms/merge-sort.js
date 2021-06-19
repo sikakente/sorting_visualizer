@@ -32,16 +32,10 @@ function merge(arr, aux, lo, mid, hi, animations) {
   let j = mid + 1;
   let k = lo;
 
-  console.log(`Merging from Lo: ${lo}: mid: ${mid}: hi: ${hi}`);
-
   while (i <= mid && j <= hi) {
-    console.log(`Comparing i:${i}; j:${j}`);
-    console.log("Before comparison: ", aux, arr);
-
     animations.push([i, j]);
     animations.push([i, j]);
     if (aux[i] <= aux[j]) {
-      console.log(`Swapping i:${i}; j:${j}`);
       animations.push([k, aux[i]]);
       arr[k] = aux[i];
       i++;
@@ -51,7 +45,6 @@ function merge(arr, aux, lo, mid, hi, animations) {
       j++;
     }
     k++;
-    console.log("After comparison: ", aux, arr);
   }
 
   while (i <= mid) {
@@ -61,7 +54,6 @@ function merge(arr, aux, lo, mid, hi, animations) {
     arr[k] = aux[i];
     i++;
     k++;
-    console.log("After Single comparison: ", aux, arr);
   }
 
   while (j <= hi) {
@@ -71,6 +63,5 @@ function merge(arr, aux, lo, mid, hi, animations) {
     arr[k] = aux[j];
     j++;
     k++;
-    console.log("After Single comparison: ", aux, arr);
   }
 }

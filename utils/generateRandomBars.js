@@ -1,5 +1,5 @@
 const DEFAULT_MIN_BARS = 20;
-const DEFAULT_MAX_BARS = 30;
+const DEFAULT_MAX_BARS = 40;
 
 export const generateRandomBars = () => {
   const bars = [];
