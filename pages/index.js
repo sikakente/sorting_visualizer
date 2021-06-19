@@ -9,7 +9,7 @@ import mergeSort from "../sorting_algorithms/merge-sort";
 const ANIMATION_SPEED_MS = 150;
 
 // This is the main color of the array bars.
-const PRIMARY_COLOR = "#14213d";
+const PRIMARY_COLOR = "#003566";
 
 // This is the color of array bars that are being compared throughout the animations.
 const SECONDARY_COLOR = "#f77f00";
