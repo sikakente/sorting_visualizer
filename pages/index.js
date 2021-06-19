@@ -2,11 +2,13 @@
 import { useState } from "react";
 import BarArea from "../components/BarArea";
 import ButtonBar from "../components/ButtonBar";
+import Header from "../components/Header";
 import { generateRandomBars } from "../utils/generateRandomBars";
 import mergeSort from "../sorting_algorithms/merge-sort";
+import quickSort from "../sorting_algorithms/quick-sort";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 150;
+const ANIMATION_SPEED_MS = 250;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = "#003566";
@@ -41,14 +43,17 @@ export default function Home() {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
-          barOneStyle.height = `${newHeight * 10}px`;
+          barOneStyle.height = `${newHeight * 5}px`;
           arrayBars[barOneIdx].innerHTML = `${newHeight}`;
         }, i * ANIMATION_SPEED_MS);
       }
     }
   };
 
-  const handleQuickSort = () => {};
+  const handleQuickSort = () => {
+    const { sortedArray, animations } = quickSort(bars);
+    setBars(sortedArray);
+  };
 
   const handleInsertionSort = () => {};
 
@@ -66,6 +71,7 @@ export default function Home() {
 
   return (
     <div>
+      <Header />
       <ButtonBar
         onGenerateBars={handleGenerateBars}
         onMergeSort={handleMergeSort}
