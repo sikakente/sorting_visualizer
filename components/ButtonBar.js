@@ -1,22 +1,44 @@
 export default function ButtonBar(props) {
-  const { onGenerateBars, onMergeSort } = props;
+  const {
+    onGenerateBars,
+    onMergeSort,
+    onInsertionSort,
+    onSelectionSort,
+    onQuickSort,
+    onStop,
+  } = props;
   return (
-    <nav className="nav">
-      <button type="button" className="btn btn-danger" onClick={onGenerateBars}>
+    <div className="container ">
+      <button type="button" className="btn btn-dark" onClick={onGenerateBars}>
         Generate Arrays
       </button>
-      <button type="button" className="btn btn-primary" onClick={onMergeSort}>
-        Merge Sort
+
+      <div className="btn-group" role="group" aria-label="Basic example">
+        <button type="button" className="btn btn-primary" onClick={onMergeSort}>
+          Merge Sort
+        </button>
+        <button type="button" className="btn btn-primary" onClick={onQuickSort}>
+          Quick Sort
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onInsertionSort}
+        >
+          Insertion Sort
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onSelectionSort}
+        >
+          Selection Sort
+        </button>
+      </div>
+
+      <button type="button" className="btn btn-danger" onClick={onStop}>
+        Stop
       </button>
-      <button type="button" className="btn btn-primary">
-        Primary
-      </button>
-      <button type="button" className="btn btn-primary">
-        Primary
-      </button>
-      <button type="button" className="btn btn-light">
-        Light
-      </button>
-    </nav>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ export default function Bar(props) {
   const { barNumber } = props;
   return (
     <div className="col">
-      <div className={styles.bar} style={{ height: `${barNumber * 10}px` }}>
+      <div className={`${styles.bar} array-bar`} style={{ height: `${barNumber * 10}px` }}>
         {barNumber}
       </div>
     </div>

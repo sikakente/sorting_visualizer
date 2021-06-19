@@ -1,50 +1,76 @@
 export default function mergeSortWithAnimation(unsortedArray) {
-  function mergeSort(arr, aux, lo, hi) {
-    if (lo === hi) {
-      return;
-    }
-
-    const mid = Math.floor((lo + hi) / 2);
-    mergeSort(aux, arr, lo, mid);
-    mergeSort(aux, arr, mid + 1, hi);
-    merge(arr, aux, lo, mid, hi);
+  const animations = [];
+  if (unsortedArray.length <= 1) {
+    return { sortedArray: [...unsortedArray], animations };
   }
 
-  function merge(arr, aux, lo, mid, hi) {
-    let i = lo;
-    let j = mid + 1;
-    let k = lo;
+  const auxiliaryArray = unsortedArray.slice();
+  mergeSort(
+    unsortedArray,
+    auxiliaryArray,
+    0,
+    unsortedArray.length - 1,
+    animations
+  );
 
-    while (i <= mid && j <= hi) {
-      if (aux[i] <= aux[j]) {
-        arr[k] = aux[i];
-        i++;
-      } else {
-        arr[k] = aux[j];
-        j++;
-      }
-      k++;
-    }
+  return { sortedArray: unsortedArray.slice(), animations };
+}
 
-    while (i <= mid) {
+function mergeSort(arr, aux, lo, hi, animations) {
+  if (lo === hi) {
+    return;
+  }
+
+  const mid = Math.floor((lo + hi) / 2);
+  mergeSort(aux, arr, lo, mid, animations);
+  mergeSort(aux, arr, mid + 1, hi, animations);
+  merge(arr, aux, lo, mid, hi, animations);
+}
+
+function merge(arr, aux, lo, mid, hi, animations) {
+  let i = lo;
+  let j = mid + 1;
+  let k = lo;
+
+  console.log(`Merging from Lo: ${lo}: mid: ${mid}: hi: ${hi}`);
+
+  while (i <= mid && j <= hi) {
+    console.log(`Comparing i:${i}; j:${j}`);
+    console.log("Before comparison: ", aux, arr);
+
+    animations.push([i, j]);
+    animations.push([i, j]);
+    if (aux[i] <= aux[j]) {
+      console.log(`Swapping i:${i}; j:${j}`);
+      animations.push([k, aux[i]]);
       arr[k] = aux[i];
       i++;
-      k++;
-    }
-
-    while (j <= mid) {
+    } else {
+      animations.push([k, aux[j]]);
       arr[k] = aux[j];
       j++;
-      k++;
     }
+    k++;
+    console.log("After comparison: ", aux, arr);
   }
 
-  if (unsortedArray.length <= 1) {
-    return [...unsortedArray];
+  while (i <= mid) {
+    animations.push([i, i]);
+    animations.push([i, i]);
+    animations.push([k, aux[i]]);
+    arr[k] = aux[i];
+    i++;
+    k++;
+    console.log("After Single comparison: ", aux, arr);
   }
 
-  const auxiliaryArray = [...unsortedArray];
-  mergeSort(unsortedArray, auxiliaryArray, 0, unsortedArray.length - 1);
-
-  return [...unsortedArray];
+  while (j <= hi) {
+    animations.push([j, j]);
+    animations.push([j, j]);
+    animations.push([k, aux[j]]);
+    arr[k] = aux[j];
+    j++;
+    k++;
+    console.log("After Single comparison: ", aux, arr);
+  }
 }
