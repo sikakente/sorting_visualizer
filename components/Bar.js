@@ -2,7 +2,6 @@ import styles from "./Bar.module.css";
 
 export default function Bar(props) {
   const { barNumber } = props;
-  console.log(barNumber * 5);
   return (
     <div className="col">
       <div

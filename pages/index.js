@@ -5,10 +5,14 @@ import ButtonBar from "../components/ButtonBar";
 import Header from "../components/Header";
 import { generateRandomBars } from "../utils/generateRandomBars";
 import mergeSort from "../sorting_algorithms/merge-sort";
-import quickSort from "../sorting_algorithms/quick-sort";
+import quickSort, {
+  IS_COMPARING,
+  IS_REVERSING,
+  IS_SWAPPING,
+} from "../sorting_algorithms/quick-sort";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 250;
+const ANIMATION_SPEED_MS = 150;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = "#003566";
@@ -51,8 +55,41 @@ export default function Home() {
   };
 
   const handleQuickSort = () => {
-    const { sortedArray, animations } = quickSort(bars);
-    setBars(sortedArray);
+    const { animations } = quickSort(bars);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const [barOneIdx, barTwoIdx, operation] = animations[i];
+
+      if (operation === IS_COMPARING) {
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = SECONDARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (operation === IS_REVERSING) {
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (operation === IS_SWAPPING) {
+        setTimeout(() => {
+          const barOneStyle = arrayBars[barOneIdx].style;
+          const barTwoStyle = arrayBars[barTwoIdx].style;
+          const barOneHeight = parseInt(arrayBars[barOneIdx].innerHTML);
+          const barTwoHeight = parseInt(arrayBars[barTwoIdx].innerHTML);
+
+          barOneStyle.height = `${barTwoHeight * 5}px`;
+          barTwoStyle.height = `${barOneHeight * 5}px`;
+          arrayBars[barOneIdx].innerHTML = `${barTwoHeight}`;
+          arrayBars[barTwoIdx].innerHTML = `${barOneHeight}`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
   };
 
   const handleInsertionSort = () => {};
