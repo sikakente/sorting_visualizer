@@ -21,7 +21,7 @@ const PRIMARY_COLOR = "#003566";
 // This is the color of array bars that are being compared throughout the animations.
 const SECONDARY_COLOR = "#f77f00";
 
-const FORWARD_COLOR = "#2b9348";
+const FORWARD_COLOR = "#ff0054";
 
 const BACKWARD_COLOR = "#ff6700";
 
