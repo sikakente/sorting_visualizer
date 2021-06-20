@@ -6,7 +6,8 @@ import Header from "../components/Header";
 import { generateRandomBars } from "../utils/generateRandomBars";
 import mergeSort from "../sorting_algorithms/merge-sort";
 import quickSort, {
-  IS_COMPARING,
+  IS_BACKWARD_COMPARING,
+  IS_FORWARD_COMPARING,
   IS_REVERSING,
   IS_SWAPPING,
 } from "../sorting_algorithms/quick-sort";
@@ -19,6 +20,10 @@ const PRIMARY_COLOR = "#003566";
 
 // This is the color of array bars that are being compared throughout the animations.
 const SECONDARY_COLOR = "#f77f00";
+
+const FORWARD_COLOR = "#2b9348";
+
+const BACKWARD_COLOR = "#ff6700";
 
 export default function Home() {
   const [bars, setBars] = useState(() => generateRandomBars());
@@ -60,10 +65,18 @@ export default function Home() {
       const arrayBars = document.getElementsByClassName("array-bar");
       const [barOneIdx, barTwoIdx, operation] = animations[i];
 
-      if (operation === IS_COMPARING) {
+      if (operation === IS_FORWARD_COMPARING) {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
-        const color = SECONDARY_COLOR;
+        const color = FORWARD_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else if (operation === IS_BACKWARD_COMPARING) {
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = BACKWARD_COLOR;
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;

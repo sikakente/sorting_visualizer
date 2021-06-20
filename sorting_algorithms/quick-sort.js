@@ -1,6 +1,7 @@
-export const IS_COMPARING = 0;
-export const IS_REVERSING = 1;
-export const IS_SWAPPING = 2;
+export const IS_FORWARD_COMPARING = 0;
+export const IS_BACKWARD_COMPARING = 1;
+export const IS_REVERSING = 2;
+export const IS_SWAPPING = 3;
 
 export default function quickSortWithAnimation(unsortedArray) {
   const animations = [];
@@ -30,12 +31,12 @@ function partition(arr, start, end, animations) {
 
   while (true) {
     while (i <= end && arr[i] <= pivot) {
-      animations.push([i, start, IS_COMPARING]);
+      animations.push([i, start, IS_FORWARD_COMPARING]);
       animations.push([i, start, IS_REVERSING]);
       i++;
     }
     while (arr[j] > pivot) {
-      animations.push([j, start, IS_COMPARING]);
+      animations.push([j, start, IS_BACKWARD_COMPARING]);
       animations.push([j, start, IS_REVERSING]);
       j--;
     }
