@@ -8,6 +8,7 @@ export default function ButtonBar(props) {
     onSelectionSort,
     onQuickSort,
     onStop,
+    onSpeedChange,
   } = props;
   return (
     <div className={`container ${styles.buttonBar}`}>
@@ -52,6 +53,19 @@ export default function ButtonBar(props) {
             >
               Selection Sort
             </button>
+          </div>
+          <div>
+            <label htmlFor="customRange2" className="form-label">
+              Speed
+            </label>
+            <input
+              type="range"
+              className="form-range"
+              min="10"
+              max="250"
+              id="customRange2"
+              onChange={onSpeedChange}
+            />
           </div>
         </div>
 

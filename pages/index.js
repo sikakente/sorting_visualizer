@@ -13,7 +13,7 @@ import quickSort, {
 } from "../sorting_algorithms/quick-sort";
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 150;
+const ANIMATION_SPEED_MS = 100;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = "#003566";
@@ -27,6 +27,7 @@ const BACKWARD_COLOR = "#ff6700";
 
 export default function Home() {
   const [bars, setBars] = useState(() => generateRandomBars());
+  const [animationSpeed, setAnimationSpeed] = useState(ANIMATION_SPEED_MS);
 
   const handleGenerateBars = () => {
     const newBars = generateRandomBars();
@@ -47,14 +48,14 @@ export default function Home() {
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       } else {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight * 5}px`;
           arrayBars[barOneIdx].innerHTML = `${newHeight}`;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       }
     }
   };
@@ -72,7 +73,7 @@ export default function Home() {
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       } else if (operation === IS_BACKWARD_COMPARING) {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -80,7 +81,7 @@ export default function Home() {
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       } else if (operation === IS_REVERSING) {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -88,7 +89,7 @@ export default function Home() {
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       } else if (operation === IS_SWAPPING) {
         setTimeout(() => {
           const barOneStyle = arrayBars[barOneIdx].style;
@@ -100,7 +101,7 @@ export default function Home() {
           barTwoStyle.height = `${barOneHeight * 5}px`;
           arrayBars[barOneIdx].innerHTML = `${barTwoHeight}`;
           arrayBars[barTwoIdx].innerHTML = `${barOneHeight}`;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * animationSpeed);
       }
     }
   };
@@ -119,6 +120,11 @@ export default function Home() {
     handleGenerateBars();
   };
 
+  const handleSpeedChange = (e) => {
+    e.preventDefault();
+    setAnimationSpeed(parseInt(e.target.value));
+  };
+
   return (
     <div>
       <Header />
@@ -129,6 +135,7 @@ export default function Home() {
         onInsertionSort={handleInsertionSort}
         onSelectionSort={handleSelectionSort}
         onStop={handleStop}
+        onSpeedChange={handleSpeedChange}
       />
       <BarArea bars={bars} />
     </div>

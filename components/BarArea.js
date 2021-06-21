@@ -5,7 +5,7 @@ export default function BarArea(props) {
   const { bars } = props;
   return (
     <div className="container">
-      <div className={`row align-items-start ${styles.bararea}`}>
+      <div className={`col ${styles.bararea}`}>
         {bars.map((barNumber, index) => (
           <Bar key={index} barNumber={barNumber} />
         ))}
@@ -13,3 +13,5 @@ export default function BarArea(props) {
     </div>
   );
 }
+
+//<div className={`row align-items-start ${styles.bararea}`}>
